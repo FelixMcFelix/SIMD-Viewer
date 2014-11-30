@@ -12,10 +12,12 @@ function IS3Main() {
 
 	function begin() {
 		console.log("super table csv");
-		console.log(csvReader.read(files["csv/super-table.csv"]));
+		window.Model.data.simd = csvReader.read(files["csv/super-table.csv"]);
+		console.log(window.Model.data.simd);
 
 		console.log("referendum csv");
-		console.log(csvReader.read(files["csv/referendum.csv"]));
+		window.Model.data.referendum = csvReader.read(files["csv/referendum.csv"])
+		console.log(window.Model.data.referendum);
 	};
 
 	function loadFile(url) {

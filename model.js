@@ -1,7 +1,7 @@
 window.Model = {
 	data: {
-		referendum: "",
-		simd: ""
+		referendum: [[]],
+		simd: [[]]
 	},
 	
 	//0 = map, 1 = scatter, 2 = bar
