@@ -18,6 +18,8 @@ function IS3Main() {
 		console.log("referendum csv");
 		window.Model.data.referendum = csvReader.read(files["csv/referendum.csv"]);
 		console.log(window.Model.data.referendum);
+
+		controlPane.prepareSelects();
 	};
 
 	function loadFile(url) {
