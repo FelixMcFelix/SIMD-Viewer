@@ -1,4 +1,6 @@
 window.controlPane = new (function(){
+	var custom1num, custom2num, store;
+
 	this.prepareSelects = function(){
 		var sel1 = document.getElementById("box1");
 		var sel2 = document.getElementById("box2");
@@ -23,14 +25,22 @@ window.controlPane = new (function(){
 				intInd++;
 			}
 		}
-		//Add CUSTOM boxes to each selector. These
-		sel1.options[sel1.options.length] = new Option("Custom 1", "simd"+Model.data.simd[0].length, false, false);
-		sel2.options[sel2.options.length] = new Option("Custom 1", "simd"+Model.data.simd[0].length, false, false);
-		sel1.options[sel1.options.length] = new Option("Custom 2", "simd"+(Model.data.simd[0].length+1), false, false);
-		sel2.options[sel2.options.length] = new Option("Custom 2", "simd"+(Model.data.simd[0].length+1), false, false);
+		//Add CUSTOM boxes to each selector. These will allow more advanced data transforms.
+		store = "simd"
+		custom1num = Model.data.simd[0].length;
+		custom2num = custom1num+1;
+
+		sel1.options[sel1.options.length] = new Option("Custom 1", store+custom1num, false, false);
+		sel2.options[sel2.options.length] = new Option("Custom 1", store+custom1num, false, false);
+		sel1.options[sel1.options.length] = new Option("Custom 2", store+custom2num, false, false);
+		sel2.options[sel2.options.length] = new Option("Custom 2", store+custom2num, false, false);
 
 		//Match initial model state to initial selectorbox state.
 		Model.comparison.var1 = "ref1";
 		Model.comparison.var2 = "ref1";
+	}
+
+	var changedEvt = function(){
+		
 	}
 })();
