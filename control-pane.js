@@ -38,9 +38,22 @@ window.controlPane = new (function(){
 		//Match initial model state to initial selectorbox state.
 		Model.comparison.var1 = "ref1";
 		Model.comparison.var2 = "ref1";
+
+		//Set the 'on-select' property of these boxes now.
+		sel1.onchange = changedSelectEvt;
+		sel2.onchange = changedSelectEvt;
 	}
 
-	var changedEvt = function(){
-		
+	changedSelectEvt = function(){
+		var caller = this.id;
+		switch(caller){
+			case "box1":
+				Model.comparison.var1 = this.value;
+				break;
+			case "box2":
+				Model.comparison.var2 = this.value;
+				break;
+		}
+		console.log(Model.comparison);
 	}
 })();

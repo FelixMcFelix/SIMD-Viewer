@@ -15,6 +15,9 @@ window.Model = {
 	comparison: {
 		//0 = name, 1 = var1, 2 = var2
 		sortBy: 0,
+		//How to know what data sets should be normalised:
+		normal1: false,
+		normal2: false,
 		//Store the names of our desired variables here for now.
 		var1: "",
 		var2: "",
