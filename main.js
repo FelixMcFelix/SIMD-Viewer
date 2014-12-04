@@ -1,14 +1,15 @@
 function IS3Main() {
 	var files = {};
-	var fileQuota = 2;
+	var fileQuota = 3;
 	var filesLoaded = 0;
 
 	init();
 
 	function init() {
 		loadFile("csv/super-table.csv");
-		loadFile("csv/referendum.csv")
-	}	
+		loadFile("csv/referendum.csv");
+		loadFile("img/map.svg");
+	}
 
 	function begin() {
 		console.log("super table csv");
@@ -20,9 +21,16 @@ function IS3Main() {
 		console.log(Model.data.referendum);
 
 		addConstituencies();
-
 		controlPane.prepareSelects();
+
+		//prepare ajax loaded elements here
+		document.getElementById("mapCont").innerHTML = files["img/map.svg"]; 
+		setTimeout(domReady, 16);
 	};
+
+	function domReady() {
+		var map = new Map(Model, Model.data.referendum);
+	}
 
 	function loadFile(url) {
 		var xml = new XMLHttpRequest();
