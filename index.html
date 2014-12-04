@@ -7,6 +7,7 @@
 <script type="text/javascript" src="model.js"></script>
 <script type="text/javascript" src="csvReader.js"></script>
 <script type="text/javascript" src="d3.min.js"></script>
+<script type="text/javascript" src="control-pane.js"></script>
 
 </head>
 
@@ -32,7 +33,28 @@
 		<div id="control-space">
 			
 			<div id="selector-box">
+				<p><u>Comparison</u></p>
 				
+				<p>Variable 1:</p>
+				<div class="varControl" id="varControl1">
+					<select id="box1">
+						<option>A</option>
+						<option>B</option>
+					</select><br />
+					<input type="checkbox" id="normVar1" name="normVar1" value="true"><label for="normVar1">Normalise</label>
+					<input type="radio" id="var1sort" name="sortie" value="var1"><label for="var1sort">Sort</label>
+				</div>
+				<div class="varControl" id="varControl2">
+					<p>Variable 2:</p>
+					<select id="box2">
+						<option>C</option>
+						<option>D</option>
+					</select><br />
+					<input type="checkbox" id="normVar2" name="normVar2" value="true"><label for="normVar2">Normalise</label>
+					<input type="radio" id="var2sort" name="sortie" value="var2"><label for="var2sort">Sort</label>
+				</div>
+				<br />
+				<input type="radio" id="var0sort" name="sortie" value="var0" checked><label for="var0sort">Sort by name</label>
 			</div>
 			
 			<div id="data-box">
