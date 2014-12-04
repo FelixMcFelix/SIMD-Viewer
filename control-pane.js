@@ -60,20 +60,6 @@ window.controlPane = new (function(){
 		rad2.onchange = changedRadioEvt;
 	}
 
-	/*recomputeData = function(){
-		var str1 = Model.comparison.var1;
-		var str2 = Model.comparison.var2;
-		//Detect what we are even doing.
-		var id1 = str1.charAt(0)=="r"?"ref":"simd";
-		var id2 = str2.charAt(0)=="r"?"ref":"simd";
-		var col1 = Model.
-		var col2 = parseInt();
-
-		for(var i = 1; i < Model.data.referendum.length; i++){
-
-		}
-	}*/
-
 	changedSelectEvt = function(){
 		var caller = this.id;
 		switch(caller){
