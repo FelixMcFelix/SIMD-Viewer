@@ -62,6 +62,7 @@ window.Model = new (function(){
 		change: []
 	}
 
+	//EVENTS
 	this.select = function(id){
 		notifyAll("select");
 		notifyAll("change");
@@ -87,11 +88,32 @@ window.Model = new (function(){
 		notifyAll("change");
 	}
 
-	addListener = function(event, function){
-		subscribers[event].push(function);
+	//SUBSCRIPTION
+	this.addSelectListener = function(func){
+		addListener("select", func);
+	}
+	this.addHoverListener = function(func){
+		addListener("hover", func);
+	}
+	this.addUnselectListener = function(func){
+		addListener("unselect", func);
+	}
+	this.addUnhoverListener = function(func){
+		addListener("unhover", func);
+	}
+	this.addDataChangeListener = function(func){
+		addListener("dataChange", func);
+	}
+	this.addChangeListener = function(func){
+		addListener("change", func);
 	}
 
-	notifyAll = function(event){
+	var addListener = function(event, func){
+		subscribers[event].push(func);
+	}
+
+	//PUBLISHING
+	var notifyAll = function(event){
 		for(int i=0; i<subscribers[event].length; i++){
 			subscribers[event][i]();
 		}
