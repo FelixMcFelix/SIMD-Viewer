@@ -21,6 +21,8 @@ window.Model = {
 		//Store the names of our desired variables here for now.
 		var1: "",
 		var2: "",
+		var1dat: [],
+		var2dat: [],
 		//[0] and [1] are min and max for var1, [1] and [2] are min and max for var2
 		colours: []
 	}
