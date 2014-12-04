@@ -62,6 +62,12 @@ window.Model = new (function(){
 		change: []
 	}
 
+	var consituencies = [];
+
+	this.addConstituency = function(constObj){
+		consituencies.push(constObj);
+	}
+
 	//EVENTS
 	this.select = function(id){
 		notifyAll("select");
@@ -121,6 +127,14 @@ window.Model = new (function(){
 }
 )()
 
-window.Consituency = function(name, refRow, simdRow, ){
+window.Consituency = function(name, refRow, simdRow){
+	this.name = name;
+	this.allRef = refRow;
+	this.allSIMD = simdRow;
 
+	this.x = allRef[1];
+	this.y = allRef[1];
+
+	this.selected = true;
+	this.hover = false;
 }
