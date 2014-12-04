@@ -12,12 +12,14 @@ function IS3Main() {
 
 	function begin() {
 		console.log("super table csv");
-		window.Model.data.simd = csvReader.read(files["csv/super-table.csv"]);
-		console.log(window.Model.data.simd);
+		Model.data.simd = csvReader.read(files["csv/super-table.csv"]);
+		console.log(Model.data.simd);
 
 		console.log("referendum csv");
-		window.Model.data.referendum = csvReader.read(files["csv/referendum.csv"]);
-		console.log(window.Model.data.referendum);
+		Model.data.referendum = csvReader.read(files["csv/referendum.csv"]);
+		console.log(Model.data.referendum);
+
+		addConstituencies();
 
 		controlPane.prepareSelects();
 	};
@@ -31,6 +33,13 @@ function IS3Main() {
 			if (++filesLoaded == fileQuota) begin();
 		};
 		xml.send();
+	}
+
+	function addConstituencies(){
+		for (var i = 1; i < Model.data.referendum.length; i++) {
+			var c = new Constituency(Model.data.referendum[i][0], Model.data.referendum[i], Model.data.simd[i]);
+			Model.addConstituency(c);
+		};
 	}
 }
 
