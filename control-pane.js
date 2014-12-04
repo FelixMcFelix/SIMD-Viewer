@@ -5,6 +5,13 @@ window.controlPane = new (function(){
 		var sel1 = document.getElementById("box1");
 		var sel2 = document.getElementById("box2");
 
+		var check1 = document.getElementById("normVar1");
+		var check2 = document.getElementById("normVar2");
+
+		var rad0 = document.getElementById("var0sort");
+		var rad1 = document.getElementById("var1sort");
+		var rad2 = document.getElementById("var2sort");
+
 		sel1.options.length = 0;
 		sel2.options.length = 0;
 
@@ -39,9 +46,18 @@ window.controlPane = new (function(){
 		Model.comparison.var1 = "ref1";
 		Model.comparison.var2 = "ref1";
 
-		//Set the 'on-select' property of these boxes now.
+		//Set the 'onchange' property of these boxes now.
 		sel1.onchange = changedSelectEvt;
 		sel2.onchange = changedSelectEvt;
+
+		//Set the 'onchenge' property of the checkboxes now.
+		check1.onchange = changedCheckboxEvt;
+		check2.onchange = changedCheckboxEvt;
+
+		//Set the 'onchenge' property of the radio buttons now.
+		rad0.onchange = changedRadioEvt;
+		rad1.onchange = changedRadioEvt;
+		rad2.onchange = changedRadioEvt;
 	}
 
 	changedSelectEvt = function(){
@@ -54,14 +70,32 @@ window.controlPane = new (function(){
 				Model.comparison.var2 = this.value;
 				break;
 		}
-		console.log(Model.comparison);
 	}
 
 	changedCheckboxEvt = function(){
 		var caller = this.id;
+		switch(caller){
+			case "normVar1":
+				Model.comparison.normal1 = this.checked;
+				break;
+			case "normVar2":
+				Model.comparison.normal2 = this.checked;
+				break;
+		}
 	}
 
 	changedRadioEvt = function(){
 		var caller = this.id;
+		switch(caller){
+			case "var0sort":
+				Model.comparison.sortBy = 0;
+				break;
+			case "var1sort":
+				Model.comparison.sortBy = 1;
+				break;
+			case "var2sort":
+				Model.comparison.sortBy = 2;
+				break;
+		}
 	}
 })();
