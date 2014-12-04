@@ -56,4 +56,12 @@ window.controlPane = new (function(){
 		}
 		console.log(Model.comparison);
 	}
+
+	changedCheckboxEvt = function(){
+		var caller = this.id;
+	}
+
+	changedRadioEvt = function(){
+		var caller = this.id;
+	}
 })();
