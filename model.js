@@ -57,7 +57,48 @@ window.Model = new (function(){
 		select: [],
 		unselect: [],
 		hover: [],
-		unhover: []
+		unhover: [],
+		dataChange: [],
+		change: []
+	}
+
+	this.select = function(id){
+		notifyAll("select");
+		notifyAll("change");
+	}
+
+	this.unselect = function(id){
+		notifyAll("unselect");
+		notifyAll("change");
+	}
+
+	this.hover = function(id){
+		notifyAll("hover");
+		notifyAll("change");
+	}
+
+	this.unhover = function(){
+		notifyAll("unhover");
+		notifyAll("change");
+	}
+
+	this.broadcastDataChange = function(){
+		notifyAll("dataChange");
+		notifyAll("change");
+	}
+
+	addListener = function(event, function){
+		subscribers[event].push(function);
+	}
+
+	notifyAll = function(event){
+		for(int i=0; i<subscribers[event].length; i++){
+			subscribers[event][i]();
+		}
 	}
 }
 )()
+
+window.Consituency = function(name, refRow, simdRow, ){
+
+}
