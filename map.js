@@ -80,7 +80,8 @@ function Map(model, ref) {
 			.duration(1000)
 			.delay(function(d) {
 				var centroid = getCentroid(d3.select(this))
-				return (centroid[0]/2+centroid[1])/2;
+				console.log(centroid);
+				return ((centroid[0]-191)/2+(centroid[1]-238))/1;
 			})
 			.ease("elastic")
 
@@ -131,9 +132,18 @@ function Map(model, ref) {
 		return [bbox.x + bbox.width/2, bbox.y + bbox.height/2];
 	}
 
+	function getVarName(vari) {
+		var col1 = parseInt(vari.replace(/\D/g,''));
+		if(vari.charAt(0) == "r"){
+			return model.data.referendum[0][col1]
+		} else {
+			return model.data.simd[0][col1]
+		}
+	}
+
 	function mouseOver(d, i) {
 		model.hover(d.id);
-		tip.attr('class', 'd3-tip show').show(d.name);
+		tip.attr('class', 'd3-tip show').show(d.name+"<br><span class='d3-subtip'>"+getVarName(model.comparison.var1)+": "+d.x+"<br>"+getVarName(model.comparison.var2)+": "+d.y+"</span>");
 	}
 
 	function mouseOut(d, i) {
