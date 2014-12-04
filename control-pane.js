@@ -84,6 +84,7 @@ window.controlPane = new (function(){
 				Model.comparison.var2 = this.value;
 				break;
 		}
+		Model.broadcastDataChange();
 	}
 
 	changedCheckboxEvt = function(){
@@ -96,6 +97,7 @@ window.controlPane = new (function(){
 				Model.comparison.normal2 = this.checked;
 				break;
 		}
+		Model.broadcastDataChange();
 	}
 
 	changedRadioEvt = function(){
@@ -111,5 +113,6 @@ window.controlPane = new (function(){
 				Model.comparison.sortBy = 2;
 				break;
 		}
+		Model.broadcastDataChange();
 	}
 })();

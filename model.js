@@ -28,13 +28,15 @@
 	}
 }*/
 window.Model = new (function(){
-	this.data = {
+	var t = this;
+
+	t.data = {
 		referendum: [[]],
 		simd: [[]]
 	}
 
-	this.visualisation = 0;
-	this.comparison = {
+	t.visualisation = 0;
+	t.comparison = {
 		//0 = name, 1 = var1, 2 = var2
 		sortBy: 0,
 		//How to know what data sets should be normalised:
@@ -49,8 +51,8 @@ window.Model = new (function(){
 		colours: []
 	}
 
-	this.masterSelections = [];
-	this.subSelections = [];
+	t.masterSelections = [];
+	t.subSelections = [];
 
 	//Use the publisher-subscriber abstraction to simulate event behaviour.
 	var subscribers = {
@@ -62,55 +64,93 @@ window.Model = new (function(){
 		change: []
 	}
 
-	var consituencies = [];
+	//Adding new constituencies.
+	t.constituencies = {};
+	t.constituenciesArray = [];
 
-	this.addConstituency = function(constObj){
-		consituencies.push(constObj);
+	t.addConstituency = function(constObj){
+		constObj.id = t.constituenciesArray.length;
+
+		t.constituencies[constObj.name] = constObj;
+		t.constituenciesArray.push(constObj);
 	}
 
 	//EVENTS
-	this.select = function(id){
+	t.select = function(id){
+		t.constituenciesArray[id].selected = true;
+
 		notifyAll("select");
 		notifyAll("change");
 	}
 
-	this.unselect = function(id){
+	t.unselect = function(id){
+		t.constituenciesArray[id].selected = false;
+
 		notifyAll("unselect");
 		notifyAll("change");
 	}
 
-	this.hover = function(id){
+	t.hover = function(id){
+		t.constituenciesArray[id].hover = true;
+
 		notifyAll("hover");
 		notifyAll("change");
 	}
 
-	this.unhover = function(){
+	t.unhover = function(){
+		for(var i=0; i<t.constituenciesArray.length; i++){t.constituenciesArray[i].hover = false;}
+
 		notifyAll("unhover");
 		notifyAll("change");
 	}
 
-	this.broadcastDataChange = function(){
+	t.broadcastDataChange = function(){
+		//Obtain column numbers.
+		var col1 = parseInt(Model.comparison.var1.replace(/\D/g,''));
+		var col2 = parseInt(Model.comparison.var2.replace(/\D/g,''));
+		
+
+		//Use our setting to propagate the data changes.
+		for(var i=0; i<t.constituenciesArray.length; i++){
+			var constObj = t.constituenciesArray[i];
+			//Change x and y as necessary.
+			//Detect what we are even doing.
+			if(Model.comparison.var1.charAt(0) == "r"){
+				constObj.x = toNumber(constObj.allRef[col1]);
+			} else{
+				constObj.x = toNumber(constObj.allSIMD[col1]);
+			}
+
+			if(Model.comparison.var2.charAt(0) == "r"){
+				constObj.y = toNumber(constObj.allRef[col2]);
+			} else{
+				constObj.y = toNumber(constObj.allSIMD[col2]);
+			}
+		
+		}
+		//normalise(); TBD
+
 		notifyAll("dataChange");
 		notifyAll("change");
 	}
 
 	//SUBSCRIPTION
-	this.addSelectListener = function(func){
+	t.addSelectListener = function(func){
 		addListener("select", func);
 	}
-	this.addHoverListener = function(func){
+	t.addHoverListener = function(func){
 		addListener("hover", func);
 	}
-	this.addUnselectListener = function(func){
+	t.addUnselectListener = function(func){
 		addListener("unselect", func);
 	}
-	this.addUnhoverListener = function(func){
+	t.addUnhoverListener = function(func){
 		addListener("unhover", func);
 	}
-	this.addDataChangeListener = function(func){
+	t.addDataChangeListener = function(func){
 		addListener("dataChange", func);
 	}
-	this.addChangeListener = function(func){
+	t.addChangeListener = function(func){
 		addListener("change", func);
 	}
 
@@ -120,21 +160,28 @@ window.Model = new (function(){
 
 	//PUBLISHING
 	var notifyAll = function(event){
-		for(int i=0; i<subscribers[event].length; i++){
+		for(var i=0; i<subscribers[event].length; i++){
 			subscribers[event][i]();
 		}
 	}
 }
 )()
 
-window.Consituency = function(name, refRow, simdRow){
+window.Constituency = function(name, refRow, simdRow){
+	this.id = 0;
 	this.name = name;
 	this.allRef = refRow;
 	this.allSIMD = simdRow;
 
-	this.x = allRef[1];
-	this.y = allRef[1];
+	this.x = toNumber(this.allRef[1]);
+	this.y = toNumber(this.allRef[1]);
 
 	this.selected = true;
 	this.hover = false;
+}
+
+window.toNumber = function(num){
+	num = num.replace(",","");
+	num = num.replace(" ","");
+	return parseInt(num, 10);
 }
