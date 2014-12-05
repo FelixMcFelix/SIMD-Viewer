@@ -8,7 +8,7 @@ window.dataTable = new (function(){
 		sel = document.getElementById("box1");
 
 		//Force model to round the view to 2 decimal places.
-		Model.broadcastDataChange();
+		//Model.broadcastDataChange();
 
 		Model.addDataChangeListener(refreshTable);
 		Model.addSelectListener(refreshTable);

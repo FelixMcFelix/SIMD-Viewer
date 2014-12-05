@@ -87,15 +87,15 @@ window.Model = new (function(){
 			//Change x and y as necessary.
 			//Detect what we are even doing.
 			if(Model.comparison.var1.charAt(0) == "r"){
-				constObj.x = (toNumber(constObj.allRef[col1])).toFixed(2);
+				constObj.x = toNumber(constObj.allRef[col1]);
 			} else{
-				constObj.x = (toNumber(constObj.allSIMD[col1])).toFixed(2);
+				constObj.x = toNumber(constObj.allSIMD[col1]);
 			}
 
 			if(Model.comparison.var2.charAt(0) == "r"){
-				constObj.y = (toNumber(constObj.allRef[col2])).toFixed(2);
+				constObj.y = toNumber(constObj.allRef[col2]);
 			} else{
-				constObj.y = (toNumber(constObj.allSIMD[col2])).toFixed(2);
+				constObj.y = toNumber(constObj.allSIMD[col2]);
 			}
 		
 		}
