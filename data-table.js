@@ -5,6 +5,7 @@ window.dataTable = new (function(){
 	
 	this.initialise = function(){
 		table = document.getElementById("data-table");
+		document.getElementById("data-box").style.opacity = 1;
 		sel = document.getElementById("box1");
 
 		//Force model to round the view to 2 decimal places.

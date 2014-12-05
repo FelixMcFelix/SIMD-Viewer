@@ -23,6 +23,7 @@ function IS3Main() {
 		loadFile("csv/super-table.csv");
 		loadFile("csv/referendum.csv");
 		loadFile("img/map.svg");
+		document.getElementById("master").style.opacity = 1;
 		big();
 	}
 
@@ -104,12 +105,14 @@ function IS3Main() {
 		var topStart = document.getElementById("selector-box").clientHeight+10+25
 
 		var vertSpaceSel = topStart+(targetHeight-topStart)/2;
-		var offTop = vertSpaceSel-(window.innerHeight/2);
+		var offTop = vertSpaceSel-((targetHeight+50)/2);
 
 		var rescale = 400/(targetHeight-124);
-		map.scale = rescale;
+		var rescale2 = (targetHeight-topStart)/400;
 
-		transformElem(document.getElementById("mapCont"), "translate("+offLeft+"px, "+offTop+"px) scale("+rescale+", "+rescale+")");
+		map.scale = (rescale2<1)?(rescale*rescale2):rescale;
+
+		transformElem(document.getElementById("mapCont"), "translate("+offLeft+"px, "+offTop+"px) scale("+map.scale+", "+map.scale+")");
 	}
 
 	function transformElem(elem, t) {
@@ -140,10 +143,15 @@ function IS3Main() {
 
 	function big(){
 		console.log("resized");
-		targetHeight = window.innerHeight-50;
+		var height = window.innerHeight;
+		if (height < 620) height = 620;
+		var width = window.innerWidth;
+		if (width < 1024) width = 1024;
+
+		targetHeight = height-50;
 		var targetWidth = targetHeight+400+75;
-		if (targetWidth > window.innerWidth) {
-			targetHeight *= (window.innerWidth-475)/(targetWidth-475);
+		if (targetWidth > width) {
+			targetHeight *= (width-475)/(targetWidth-475);
 		}
 
 		var box = document.getElementById("vis-space");
