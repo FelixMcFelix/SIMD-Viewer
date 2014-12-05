@@ -9,7 +9,7 @@ window.Model = new (function(){
 	t.visualisation = 0;
 	t.comparison = {
 		//0 = name, 1 = var1, 2 = var2
-		sortBy: 0,
+		sortBy: 1,
 		//How to know what data sets should be normalised:
 		normal1: false,
 		normal2: false,
@@ -35,6 +35,8 @@ window.Model = new (function(){
 		change: []
 	}
 
+	var removeQueue = [];
+
 	//Adding new constituencies.
 	t.constituencies = {};
 	t.constituenciesArray = [];
@@ -54,8 +56,26 @@ window.Model = new (function(){
 		notifyAll("change");
 	}
 
+	t.selectAll = function() {
+		for (var i=0; i<t.constituenciesArray.length; i++) {
+			t.constituenciesArray[i].selected = true;
+		}
+
+		notifyAll("select");
+		notifyAll("change");
+	}
+
 	t.unselect = function(id){
 		t.constituenciesArray[id].selected = false;
+
+		notifyAll("unselect");
+		notifyAll("change");
+	}
+
+	t.unselectAll = function(){
+		for (var i=0; i<t.constituenciesArray.length; i++) {
+			t.constituenciesArray[i].selected = false;
+		}
 
 		notifyAll("unselect");
 		notifyAll("change");
@@ -127,10 +147,10 @@ window.Model = new (function(){
 		for(var i=0; i<t.constituenciesArray.length; i++){
 			constObj = t.constituenciesArray[i];
 			if(t.comparison.normal1){
-				constObj.x = ((constObj.x-minX)/(maxX-minX)).toFixed(2);
+				constObj.x = (constObj.x-minX)/(maxX-minX);
 			}
 			if(t.comparison.normal2){
-				constObj.y = ((constObj.y-minY)/(maxY-minY)).toFixed(2);
+				constObj.y = (constObj.y-minY)/(maxY-minY);
 			}
 		}
 
@@ -156,8 +176,21 @@ window.Model = new (function(){
 		addListener("change", func);
 	}
 
+	t.removeChangeListener = function(func) {
+		queueRemoveListener("change", func)
+	}
+
 	var addListener = function(event, func){
 		subscribers[event].push(func);
+	}
+
+	function queueRemoveListener(event, func) {
+		removeQueue.push({event:event, func:func});
+	}
+
+	function removeListener(event, func) {
+		subscribers[event].splice(subscribers[event].indexOf(func), 1);
+		debugger;
 	}
 
 	//PUBLISHING
@@ -165,6 +198,10 @@ window.Model = new (function(){
 		for(var i=0; i<subscribers[event].length; i++){
 			subscribers[event][i]();
 		}
+		for(var i=0; i<removeQueue.length; i++) {
+			removeListener(removeQueue[i].event, removeQueue[i].func)
+		}
+		removeQueue = [];
 	}
 }
 )()
@@ -187,5 +224,5 @@ window.toNumber = function(num){
 		num = num.replace(",","");
 		num = num.replace(" ","");
 	}
-	return parseFloat(num, 10);
+	return Number(num, 10);
 }

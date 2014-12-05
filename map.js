@@ -4,8 +4,7 @@ function Map(model, ref) {
 	var xMin = 0;
 	var yMax = 0;
 	var yMin = 0;
-	var t = this;
-
+	var t = this
 	initMap();
 
 	function initMap() {

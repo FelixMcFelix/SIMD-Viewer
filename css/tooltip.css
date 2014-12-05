@@ -7,6 +7,7 @@
   border-radius: 2px;
   pointer-events: none;
   text-align: center;
+  pointer-events: none;
 
   -webkit-transform: scale(0, 0);
   -moz-transform: scale(0, 0);
