@@ -1,0 +1,39 @@
+body {
+	margin: 25px;
+}
+
+#vis-space {
+	display: inline-block;
+}
+
+#vis-box {
+	width: 100%;
+}
+
+#selector-controls {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	height: 42px;
+}
+
+#vis-controls {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	height: 42px;
+}
+
+#control-space {
+	width: 400px;
+	vertical-align: top;
+	display: inline-block;
+	padding: 10px;
+	box-sizing: border-box;
+}
+
+#master {
+	text-align: center;
+}
+
+#control-space select {
+	width:100%;
+}
