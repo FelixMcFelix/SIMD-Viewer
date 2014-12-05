@@ -22,6 +22,7 @@ function IS3Main() {
 
 		addConstituencies();
 		controlPane.prepareSelects();
+		dataTable.initialise();
 
 		//prepare ajax loaded elements here
 		document.getElementById("mapCont").innerHTML = files["img/map.svg"]; 
