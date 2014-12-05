@@ -127,10 +127,10 @@ window.Model = new (function(){
 		for(var i=0; i<t.constituenciesArray.length; i++){
 			constObj = t.constituenciesArray[i];
 			if(t.comparison.normal1){
-				constObj.x = ((constObj.x-minX)/(maxX-minX)).toFixed(2);
+				constObj.x = (constObj.x-minX)/(maxX-minX);
 			}
 			if(t.comparison.normal2){
-				constObj.y = ((constObj.y-minY)/(maxY-minY)).toFixed(2);
+				constObj.y = (constObj.y-minY)/(maxY-minY);
 			}
 		}
 
