@@ -1,11 +1,17 @@
 function scatterPlotHandler() {
 
 	var t = this;
+	var sp;
 
 	dataChanged();
 	Model.addDataChangeListener(dataChanged);
 
 	function dataChanged() {
+		if (sp != null) {
+			sp.kill();
+			Model.removeChangeListener(sp.change);
+		}
+
 		var div = document.getElementById("scatterCont");
 		while (div.firstChild) {
 			div.removeChild(div.firstChild);
@@ -18,6 +24,7 @@ function scatterPlotHandler() {
 
 function scatterPlot(dataset, parent){
 
+	this.kill = kill;
 	var tip = d3.tip().attr('class', 'd3-tip').html(function(d) { return d; });
 
 	var xMin, yMin, xMax, yMax;
@@ -95,6 +102,7 @@ function scatterPlot(dataset, parent){
 			bakeColours();
 
 			Model.addChangeListener(bakeColours);
+			this.change = bakeColours;
 
 	function getVarName(vari) {
 		var col1 = parseInt(vari.replace(/\D/g,''));
@@ -103,6 +111,10 @@ function scatterPlot(dataset, parent){
 		} else {
 			return Model.data.simd[0][col1]
 		}
+	}
+
+	function kill() {
+		tip.attr('class', 'd3-tip').hide();
 	}
 
 	function onDataChange() {
@@ -121,12 +133,12 @@ function scatterPlot(dataset, parent){
 
 	function mouseOver(d, i) {
 		Model.hover(d.id);
-		tip.attr('class', 'd3-tip show').show(d.name+"<br><span class='d3-subtip'>"+getVarName(Model.comparison.var1)+": "+d.x+"<br>"+getVarName(Model.comparison.var2)+": "+d.y+"</span>");
+		//tip.attr('class', 'd3-tip show').show(d.name+"<br><span class='d3-subtip'>"+getVarName(Model.comparison.var1)+": "+d.x+"<br>"+getVarName(Model.comparison.var2)+": "+d.y+"</span>").offset([-25, 0]);
 	}
 
 	function mouseOut(d, i) {
 		Model.unhover();
-		tip.attr('class', 'd3-tip').hide();
+		//tip.attr('class', 'd3-tip').hide();
 	}
 
 	function clickElem(d, i) {
@@ -159,9 +171,14 @@ function scatterPlot(dataset, parent){
 	}
 
 	function setMapAttrs(target) {
+		var newTip = false;
 		target.style("fill", function(d) {
 			if (!d.selected) return "#CCCCCC";
-			if (d.hover) return "#FFBF00";
+			if (d.hover && parent.visible) {
+				tip.attr('class', 'd3-tip show').show(d.name+"<br><span class='d3-subtip'>"+getVarName(Model.comparison.var1)+": "+d.x+"<br>"+getVarName(Model.comparison.var2)+": "+d.y+"</span>", this).offset([-25, 0]);
+				newTip = true;
+				return "#FFBF00";
+			}
 			var multiplyX = (d.x-xMin)/(xMax-xMin);
 			var multiplyY = (d.y-yMin)/(yMax-yMin);
 			return "hsl("+multiplyX*120+",100%,"+(25+(multiplyY*35))+"%)";
@@ -183,7 +200,9 @@ function scatterPlot(dataset, parent){
 		})
 		.attr("r", function(d) {
 			return rScale(d.y);
-		});;
+		});
+
+		if (!newTip) tip.attr('class', 'd3-tip').hide();
 	}
 
 }

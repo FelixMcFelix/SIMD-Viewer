@@ -38,8 +38,8 @@
 		<div id="vis-space">
 		
 			<div id="selector-controls">
-				<button onclick="IS3.deselectAll()" class="red">Deselect All</button>
-				<button onclick="IS3.selectAll()">Select All</button>
+				<button onclick="Model.unselectAll()" class="red">Deselect All</button>
+				<button onclick="Model.selectAll()">Select All</button>
 			</div>
 
 			<div id="vis-box">
@@ -71,7 +71,7 @@
 					</select><br />
 					<p style="text-align:left;">
 					<input type="checkbox" id="normVar1" name="normVar1" value="true"><label for="normVar1">Normalise</label>
-					<input type="radio" id="var1sort" name="sortie" value="var1"><label for="var1sort">Sort</label>
+					<input type="radio" id="var1sort" name="sortie" value="var1" checked><label for="var1sort">Sort</label>
 					</p>
 				</div>
 				<div class="varControl" id="varControl2">
@@ -85,7 +85,7 @@
 					<input type="radio" id="var2sort" name="sortie" value="var2"><label for="var2sort">Sort</label>
 					</p>
 					<p style="text-align:left;">
-					<input type="radio" id="var0sort" name="sortie" value="var0" checked><label for="var0sort">Sort by name</label>
+					<input type="radio" id="var0sort" name="sortie" value="var0"><label for="var0sort">Sort by name</label>
 					</p>
 				</div>
 				</fieldset>

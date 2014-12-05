@@ -83,9 +83,11 @@ function IS3Main() {
 			transformElem(document.getElementById("mapCont"), "");
 		}
 		t.mode = i;
-
+		sP.visible = (i == 1);
+		bG.visible = (i == 2);
 		if (i == 1) {
 			transformElem(document.getElementById("scatterCont"), "scale(1, 1)");
+
 		} else {
 			transformElem(document.getElementById("scatterCont"), "scale(0, 0)");
 		}

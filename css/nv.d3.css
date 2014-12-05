@@ -311,6 +311,12 @@ svg .title {
 .nvd3 .nv-multibar .nv-groups rect:hover,
 .nvd3 .nv-multibarHorizontal .nv-groups rect:hover,
 .nvd3 .nv-discretebar .nv-groups rect:hover {
+  fill: #FFBF00 !important;
+  fill-opacity: 1;
+}
+
+.nv-bar-hov {
+  fill: #FFBF00 !important;
   fill-opacity: 1;
 }
 
