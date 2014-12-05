@@ -91,11 +91,7 @@ body {
 }
 
 .x.axis line {
-  stroke: #fff;
-}
-
-.x.axis .minor {
-  stroke-opacity: .5;
+  stroke: #000;
 }
 
 .x.axis path {
@@ -106,6 +102,12 @@ body {
 .y.axis line, .y.axis path {
   fill: none;
   stroke: #000;
+}
+
+#chart {
+	margin: 10px;
+	min-width: 100px;
+	min-height: 100px;
 }
 
 button {

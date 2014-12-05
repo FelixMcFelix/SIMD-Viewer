@@ -4,6 +4,7 @@ function Map(model, ref) {
 	var xMin = 0;
 	var yMax = 0;
 	var yMin = 0;
+	var t = this;
 
 	initMap();
 
@@ -48,7 +49,6 @@ function Map(model, ref) {
 	}
 
 	function onDataChange() {
-		console.log("changes")
 		var dat = model.constituenciesArray;
 		xMax = -Infinity;
 		xMin = Infinity;
@@ -80,7 +80,6 @@ function Map(model, ref) {
 			.duration(1000)
 			.delay(function(d) {
 				var centroid = getCentroid(d3.select(this))
-				console.log(centroid);
 				return ((centroid[0]-191)/2+(centroid[1]-238))/1;
 			})
 			.ease("elastic")
@@ -143,7 +142,8 @@ function Map(model, ref) {
 
 	function mouseOver(d, i) {
 		model.hover(d.id);
-		tip.attr('class', 'd3-tip show').show(d.name+"<br><span class='d3-subtip'>"+getVarName(model.comparison.var1)+": "+d.x+"<br>"+getVarName(model.comparison.var2)+": "+d.y+"</span>");
+		console.log(t.scale);
+		if (t.scale == 1) tip.attr('class', 'd3-tip show').show(d.name+"<br><span class='d3-subtip'>"+getVarName(model.comparison.var1)+": "+d.x+"<br>"+getVarName(model.comparison.var2)+": "+d.y+"</span>");
 	}
 
 	function mouseOut(d, i) {

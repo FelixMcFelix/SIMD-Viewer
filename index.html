@@ -4,6 +4,9 @@
 <title>IS3 Team Project</title>
 
 <link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/tooltip.css">
+<link rel="stylesheet" href="css/map.css">
+<link rel="stylesheet" href="css/nv.d3.css">
 
 <script type="text/javascript" src="main.js"></script>
 <script type="text/javascript" src="model.js"></script>
@@ -16,13 +19,16 @@
 
 <!-- used by map -->
 <script type="text/javascript" src="map.js"></script>
-<script type="text/javascript" src="d3.tip.js"></script>
 <script type="text/javascript" src="simplify.js"></script>
-<link rel="stylesheet" href="css/tooltip.css">
-<link rel="stylesheet" href="css/map.css">
 
 <!-- used by scatterplot -->
 <script type="text/javascript" src="scatterPlot.js"></script>
+
+<!-- used by bar chart -->
+<script type="text/javascript" src="barGraph.js"></script>
+<script src="lib/d3.v3.js"></script>
+<script src="nv.d3.js"></script>
+<script type="text/javascript" src="d3.tip.js"></script>
 
 </head>
 
@@ -39,6 +45,7 @@
 			<div id="vis-box">
 				<div id="mapCont"></div>
 				<div id="scatterCont"></div>
+				<div id="barCont"></div>
 			</div>
 
 			<div id="vis-controls">

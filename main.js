@@ -6,6 +6,7 @@ function IS3Main() {
 	var targetHeight;
 	var map;
 	var sP;
+	var bG;
 
 	this.selectAll = selectAll;
 	this.deselectAll = deselectAll;
@@ -45,6 +46,7 @@ function IS3Main() {
 	function domReady() {
 		map = new Map(Model, Model.data.referendum);
 		sP = new scatterPlotHandler();
+		bG = barChartHandler();
 		map.scale = 1;
 		big();
 	}
@@ -85,6 +87,12 @@ function IS3Main() {
 			transformElem(document.getElementById("scatterCont"), "scale(1, 1)");
 		} else {
 			transformElem(document.getElementById("scatterCont"), "scale(0, 0)");
+		}
+
+		if (i == 2) {
+			transformElem(document.getElementById("barCont"), "scale(1, 1)");
+		} else {
+			transformElem(document.getElementById("barCont"), "scale(0, 0)");
 		}
 	}
 
