@@ -149,7 +149,6 @@ window.Model = new (function(){
 			if(i==0){
 				maxX = minX = constObj.x;
 				maxY = minY = constObj.y;
-				console.log(minX + ", " + maxX + ", " + minY + ", " + maxY)
 			} else{
 				maxX = constObj.x>maxX ? constObj.x : maxX;
 				maxY = constObj.y>maxY ? constObj.y : maxY;

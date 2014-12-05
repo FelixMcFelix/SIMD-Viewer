@@ -28,13 +28,8 @@ function IS3Main() {
 	}
 
 	function begin() {
-		console.log("super table csv");
 		Model.data.simd = csvReader.read(files["csv/super-table.csv"]);
-		console.log(Model.data.simd);
-
-		console.log("referendum csv");
 		Model.data.referendum = csvReader.read(files["csv/referendum.csv"]);
-		console.log(Model.data.referendum);
 
 		addConstituencies();
 		controlPane.prepareSelects();
@@ -142,7 +137,6 @@ function IS3Main() {
 	}
 
 	function big(){
-		console.log("resized");
 		var height = window.innerHeight;
 		if (height < 620) height = 620;
 		var width = window.innerWidth;

@@ -141,7 +141,6 @@ function Map(model, ref) {
 
 	function mouseOver(d, i) {
 		model.hover(d.id);
-		console.log(t.scale);
 		if (t.scale == 1) tip.attr('class', 'd3-tip show').show(d.name+"<br><span class='d3-subtip'>"+getVarName(model.comparison.var1)+": "+d.x+"<br>"+getVarName(model.comparison.var2)+": "+d.y+"</span>");
 	}
 

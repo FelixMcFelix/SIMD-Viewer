@@ -171,10 +171,10 @@ function drawGraph(dataPoints, owner, tip) {
 	}
 
 	function resetHooks() {
+		if(bars==null) return;
 		bars.on("mouseover", mouseOver)
 			.on("mouseout", mouseOut)
 			.on("click", clickElem)
-			console.log("hooks reset");
 	}
 
 	function kill() {
@@ -260,5 +260,4 @@ function drawGraph(dataPoints, owner, tip) {
 		);*/
 	}
 
-	console.log(chart);
 }
