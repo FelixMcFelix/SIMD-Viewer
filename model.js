@@ -87,22 +87,53 @@ window.Model = new (function(){
 			//Change x and y as necessary.
 			//Detect what we are even doing.
 			if(Model.comparison.var1.charAt(0) == "r"){
-				constObj.x = toNumber(constObj.allRef[col1]);
+				constObj.x = (toNumber(constObj.allRef[col1])).toFixed(2);
 			} else{
-				constObj.x = toNumber(constObj.allSIMD[col1]);
+				constObj.x = (toNumber(constObj.allSIMD[col1])).toFixed(2);
 			}
 
 			if(Model.comparison.var2.charAt(0) == "r"){
-				constObj.y = toNumber(constObj.allRef[col2]);
+				constObj.y = (toNumber(constObj.allRef[col2])).toFixed(2);
 			} else{
-				constObj.y = toNumber(constObj.allSIMD[col2]);
+				constObj.y = (toNumber(constObj.allSIMD[col2])).toFixed(2);
 			}
 		
 		}
-		//normalise(); TBD
+		normalise();
 
 		notifyAll("dataChange");
 		notifyAll("change");
+	}
+
+	var normalise = function(){
+		var maxX,minX,maxY,minY;
+
+		//Retrieve min and max values.
+		for(var i=0; i<t.constituenciesArray.length; i++){
+			constObj = t.constituenciesArray[i];
+			if(i==0){
+				maxX = minX = constObj.x;
+				maxY = minY = constObj.y;
+				console.log(minX + ", " + maxX + ", " + minY + ", " + maxY)
+			} else{
+				maxX = constObj.x>maxX ? constObj.x : maxX;
+				maxY = constObj.y>maxY ? constObj.y : maxY;
+				minX = constObj.x<minX ? constObj.x : minX;
+				minY = constObj.y<minY ? constObj.y : minY;
+			}
+		}
+
+		//Now normalise relative to these values.
+		for(var i=0; i<t.constituenciesArray.length; i++){
+			constObj = t.constituenciesArray[i];
+			if(t.comparison.normal1){
+				constObj.x = ((constObj.x-minX)/(maxX-minX)).toFixed(2);
+			}
+			if(t.comparison.normal2){
+				constObj.y = ((constObj.y-minY)/(maxY-minY)).toFixed(2);
+			}
+		}
+
 	}
 
 	//SUBSCRIPTION
@@ -154,5 +185,5 @@ window.Constituency = function(name, refRow, simdRow){
 window.toNumber = function(num){
 	num = num.replace(",","");
 	num = num.replace(" ","");
-	return parseInt(num, 10);
+	return parseFloat(num, 10);
 }
