@@ -60,6 +60,13 @@ window.controlPane = new (function(){
 		rad0.onchange = changedRadioEvt;
 		rad1.onchange = changedRadioEvt;
 		rad2.onchange = changedRadioEvt;
+
+		//FORCE INITIAL STATES
+		check1.checked = false;
+		check2.checked = false;
+		rad0.checked = false;
+		rad1.checked = true;
+		rad2.checked = false;
 	}
 
 	changedSelectEvt = function(){
