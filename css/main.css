@@ -40,6 +40,9 @@ body {
 	display: inline-block;
 	padding: 10px;
 	box-sizing: border-box;
+
+	background-color: rgba(255,255,255,0.75);
+	border-radius: 20px;
 }
 
 #selector-box {
@@ -60,7 +63,6 @@ body {
 	overflow-y: auto;
 	-webkit-transition: opacity 500ms ease-in-out;
 	transition:         opacity 500ms ease-in-out;
-	pointer-events: none;
 }
 
 #data-table {

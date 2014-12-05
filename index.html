@@ -42,9 +42,9 @@
 			</div>
 
 			<div id="vis-controls">
-				<button onclick="IS3.mapView()">Map View</button>
-				<button onclick="IS3.scatterView()" class="orange">Scatterplot View</button>
-				<button onclick="IS3.barView()">Bar Chart View</button>
+				<button onclick="IS3.mapView()" class="orange" id="but0">Map View</button>
+				<button onclick="IS3.scatterView()" id="but1">Scatterplot View</button>
+				<button onclick="IS3.barView()" id="but2">Bar Chart View</button>
 			</div>
 
 		</div>
@@ -54,7 +54,7 @@
 			<div id="selector-box">
 				<p><u id="comparisonHead">Comparison</u></p>
 				
-				<p>Variable 1:</p>
+				<p style="font-size: 20px;">Variable 1:</p>
 				<div class="varControl" id="varControl1">
 					<select id="box1">
 						<option>A</option>
@@ -64,7 +64,7 @@
 					<input type="radio" id="var1sort" name="sortie" value="var1"><label for="var1sort">Sort</label>
 				</div>
 				<div class="varControl" id="varControl2">
-					<p>Variable 2:</p>
+					<p style="font-size: 20px;">Variable 2:</p>
 					<select id="box2">
 						<option>C</option>
 						<option>D</option>

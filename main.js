@@ -65,11 +65,18 @@ function IS3Main() {
 
 	function setMode(i) {
 		map.scale = 1;
+		var dB = document.getElementById("data-box")
+
+		document.getElementById("but"+t.mode).className = "";
+		document.getElementById("but"+i).className = "orange";
+
 		if (i != 0) {
-			document.getElementById("data-box").style.opacity = 0;
+			dB.style.opacity = 0;
+			dB.style.pointerEvents = "none";
 			positionSmallMapView();
 		} else {
-			document.getElementById("data-box").style.opacity = 1;
+			dB.style.opacity = 1;
+			dB.style.pointerEvents = "";
 			transformElem(document.getElementById("mapCont"), "");
 		}
 		t.mode = i;
