@@ -23,6 +23,7 @@ function IS3Main() {
 		loadFile("csv/super-table.csv");
 		loadFile("csv/referendum.csv");
 		loadFile("img/map.svg");
+		big();
 	}
 
 	function begin() {
@@ -46,9 +47,9 @@ function IS3Main() {
 	function domReady() {
 		map = new Map(Model, Model.data.referendum);
 		sP = new scatterPlotHandler();
-		bG = barChartHandler();
+		bG = new barChartHandler();
+		document.getElementById("mapCont").style.opacity = 1;
 		map.scale = 1;
-		big();
 	}
 
 	function selectAll() {

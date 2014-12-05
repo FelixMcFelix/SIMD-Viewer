@@ -3,7 +3,7 @@ function barChartHandler() {
 	var t = this;
 
 	var data;
-	var sp;
+	t.sp;
 
 	initData();
 	Model.addSelectListener(initData);
@@ -42,9 +42,7 @@ function barChartHandler() {
 		svg.style.height = "100%";
 		svg.className = "nvd3";
 		div.appendChild(svg);*/
-
-		sp = drawGraph(data);
-		console.log(sp)
+		drawGraph(data, t);
 	}
 
 	function dataChanged() {
@@ -60,7 +58,7 @@ function barChartHandler() {
 				data[1].values[j++].y = dat[i].y
 			}
 		}
-		sp.update();
+		t.sp.update();
 	}
 
 	function getVarName(vari) {
@@ -75,16 +73,13 @@ function barChartHandler() {
 }
 
 
-function drawGraph(dataPoints)
+function drawGraph(dataPoints, owner)
 
 {
-
-	var chart;
+	var owner = owner;
 	nv.addGraph(function() {
 
-    	chart = nv.models.multiBarChart();
-
-
+    	var chart = nv.models.multiBarChart();
 
 		chart.xAxis
 
@@ -114,6 +109,7 @@ function drawGraph(dataPoints)
 
 
 		nv.utils.windowResize(chart.update);
+		owner.sp = chart;	
+		return chart;
 	});
-	return chart;
 }
