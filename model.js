@@ -99,10 +99,41 @@ window.Model = new (function(){
 			}
 		
 		}
-		//normalise(); TBD
+		normalise();
 
 		notifyAll("dataChange");
 		notifyAll("change");
+	}
+
+	var normalise = function(){
+		var maxX,minX,maxY,minY;
+
+		//Retrieve min and max values.
+		for(var i=0; i<t.constituenciesArray.length; i++){
+			constObj = t.constituenciesArray[i];
+			if(i==0){
+				maxX = minX = constObj.x;
+				maxY = minY = constObj.y;
+				console.log(minX + ", " + maxX + ", " + minY + ", " + maxY)
+			} else{
+				maxX = constObj.x>maxX ? constObj.x : maxX;
+				maxY = constObj.x>maxY ? constObj.y : maxY;
+				minX = constObj.x<minX ? constObj.x : minX;
+				minY = constObj.x<minY ? constObj.y : minY;
+			}
+		}
+
+		//Now normalise relative to these values.
+		for(var i=0; i<t.constituenciesArray.length; i++){
+			constObj = t.constituenciesArray[i];
+			if(t.comparison.normal1){
+				constObj.x = (constObj.x-minX)/(maxX-minX);
+			}
+			if(t.comparison.normal2){
+				constObj.y = (constObj.y-minY)/(maxY-minY);
+			}
+		}
+
 	}
 
 	//SUBSCRIPTION
