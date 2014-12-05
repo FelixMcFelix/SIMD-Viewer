@@ -183,7 +183,9 @@ window.Constituency = function(name, refRow, simdRow){
 }
 
 window.toNumber = function(num){
-	num = num.replace(",","");
-	num = num.replace(" ","");
+	if(typeof num == "string"){
+		num = num.replace(",","");
+		num = num.replace(" ","");
+	}
 	return parseFloat(num, 10);
 }

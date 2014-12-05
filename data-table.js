@@ -51,6 +51,7 @@ window.dataTable = new (function(){
 							//Create a normal cell.
 							currCell = currRow.insertCell(-1);
 							currCell.textContent = (j<arr[i].allRef.length)?Model.data.referendum[i][j]:Model.data.simd[i][j-arr[i].allRef.length];
+							if(isNum(currCell.textContent)) currCell.textContent = toNumber(currCell.textContent).toFixed(2);
 						}
 					}
 				}
@@ -80,9 +81,9 @@ window.dataTable = new (function(){
 						currCell = currRow.insertCell(-1);
 						currCell.textContent = arr[i].name;
 						currCell = currRow.insertCell(-1);
-						currCell.textContent = arr[i].x;
+						currCell.textContent = (arr[i].x).toFixed(2);
 						currCell = currRow.insertCell(-1);
-						currCell.textContent = arr[i].y;
+						currCell.textContent = (arr[i].y).toFixed(2);
 					}
 				}
 				break;
@@ -96,6 +97,10 @@ window.dataTable = new (function(){
 			c += arr[i].selected?1:0;
 		}
 		return c;
+	}
+
+	var isNum = function(num){
+		return !isNaN(parseFloat(num)) && isFinite(num);
 	}
 
 })()
