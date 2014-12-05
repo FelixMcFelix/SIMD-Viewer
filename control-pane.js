@@ -32,6 +32,7 @@ window.controlPane = new (function(){
 				intInd++;
 			}
 		}
+		/*
 		//Add CUSTOM boxes to each selector. These will allow more advanced data transforms.
 		store = "simd"
 		custom1num = Model.data.simd[0].length;
@@ -40,7 +41,8 @@ window.controlPane = new (function(){
 		sel1.options[sel1.options.length] = new Option("Custom 1", store+custom1num, false, false);
 		sel2.options[sel2.options.length] = new Option("Custom 1", store+custom1num, false, false);
 		sel1.options[sel1.options.length] = new Option("Custom 2", store+custom2num, false, false);
-		sel2.options[sel2.options.length] = new Option("Custom 2", store+custom2num, false, false);
+		sel2.options[sel2.options.length] = new Option("Custom 2", store+custom2num, false, false);*/
+		//DEPRECATED unless I find the time.
 
 		//Match initial model state to initial selectorbox state.
 		Model.comparison.var1 = "ref1";
