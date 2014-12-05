@@ -54,23 +54,27 @@
 			<div id="selector-box">
 				<p><u id="comparisonHead">Comparison</u></p>
 				
-				<p style="font-size: 20px;">Variable 1:</p>
+				<p style="font-size: 20px;text-align:left;"><i>Variable 1:</i></p>
 				<div class="varControl" id="varControl1">
 					<select id="box1">
 						<option>A</option>
 						<option>B</option>
 					</select><br />
+					<p style="text-align:left;">
 					<input type="checkbox" id="normVar1" name="normVar1" value="true"><label for="normVar1">Normalise</label>
 					<input type="radio" id="var1sort" name="sortie" value="var1"><label for="var1sort">Sort</label>
+					</p>
 				</div>
 				<div class="varControl" id="varControl2">
-					<p style="font-size: 20px;">Variable 2:</p>
+					<p style="font-size: 20px;text-align:left;"><i>Variable 2:</i></p>
 					<select id="box2">
 						<option>C</option>
 						<option>D</option>
 					</select><br />
+					<p style="text-align:left;">
 					<input type="checkbox" id="normVar2" name="normVar2" value="true"><label for="normVar2">Normalise</label>
 					<input type="radio" id="var2sort" name="sortie" value="var2"><label for="var2sort">Sort</label>
+					</p>
 				</div>
 				<br />
 				<input type="radio" id="var0sort" name="sortie" value="var0" checked><label for="var0sort">Sort by name</label>

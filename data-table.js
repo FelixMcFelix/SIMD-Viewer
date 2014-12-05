@@ -29,9 +29,10 @@ window.dataTable = new (function(){
 
 		switch(n){
 			case 0:
-				var p = document.createElement("p");
-				p.textContent = "No Selected Element.";
-				table.appendChild(p);
+				currRow = table.insertRow(-1);
+				currCell = document.createElement("th");
+				currCell.textContent = "No Selected Element.";
+				table.appendChild(currCell);
 				break;
 			case 1:
 				for(var i=0; i<arr.length; i++){
