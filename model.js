@@ -117,9 +117,9 @@ window.Model = new (function(){
 				console.log(minX + ", " + maxX + ", " + minY + ", " + maxY)
 			} else{
 				maxX = constObj.x>maxX ? constObj.x : maxX;
-				maxY = constObj.x>maxY ? constObj.y : maxY;
+				maxY = constObj.y>maxY ? constObj.y : maxY;
 				minX = constObj.x<minX ? constObj.x : minX;
-				minY = constObj.x<minY ? constObj.y : minY;
+				minY = constObj.y<minY ? constObj.y : minY;
 			}
 		}
 
@@ -127,10 +127,10 @@ window.Model = new (function(){
 		for(var i=0; i<t.constituenciesArray.length; i++){
 			constObj = t.constituenciesArray[i];
 			if(t.comparison.normal1){
-				constObj.x = (constObj.x-minX)/(maxX-minX);
+				constObj.x = ((constObj.x-minX)/(maxX-minX)).toFixed(2);
 			}
 			if(t.comparison.normal2){
-				constObj.y = (constObj.y-minY)/(maxY-minY);
+				constObj.y = ((constObj.y-minY)/(maxY-minY)).toFixed(2);
 			}
 		}
 
