@@ -21,6 +21,9 @@
 <link rel="stylesheet" href="css/tooltip.css">
 <link rel="stylesheet" href="css/map.css">
 
+<!-- used by scatterplot -->
+<script type="text/javascript" src="scatterPlot.js"></script>
+
 </head>
 
 <body>
@@ -29,17 +32,18 @@
 		<div id="vis-space">
 		
 			<div id="selector-controls">
-				<button onclick="IS3.deselectAll()">Deselect All</button>
+				<button onclick="IS3.deselectAll()" class="red">Deselect All</button>
 				<button onclick="IS3.selectAll()">Select All</button>
 			</div>
 
 			<div id="vis-box">
 				<div id="mapCont"></div>
+				<div id="scatterCont"></div>
 			</div>
 
 			<div id="vis-controls">
 				<button onclick="IS3.mapView()">Map View</button>
-				<button onclick="IS3.scatterView()">Scatterplot View</button>
+				<button onclick="IS3.scatterView()" class="orange">Scatterplot View</button>
 				<button onclick="IS3.barView()">Bar Chart View</button>
 			</div>
 
@@ -48,7 +52,7 @@
 		<div id="control-space">
 			
 			<div id="selector-box">
-				<p><u>Comparison</u></p>
+				<p><u id="comparisonHead">Comparison</u></p>
 				
 				<p>Variable 1:</p>
 				<div class="varControl" id="varControl1">

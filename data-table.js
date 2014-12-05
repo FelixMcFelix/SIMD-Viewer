@@ -40,6 +40,7 @@ window.dataTable = new (function(){
 							if(j==arr[i].allRef.length) continue;
 							//Store ref to current row.
 							currRow = table.insertRow(-1);
+							currRow.className = (j%2==1)?"alt":"";
 	
 							//Create a heading cell, containing name of var
 							currCell = document.createElement("th");
@@ -74,6 +75,7 @@ window.dataTable = new (function(){
 				for(var i=0; i<arr.length; i++){
 					if(arr[i].selected){
 						currRow = table.insertRow(-1);
+						currRow.className = (i%2==1)?"alt":"";
 						currCell = currRow.insertCell(-1);
 						currCell.textContent = arr[i].name;
 						currCell = currRow.insertCell(-1);

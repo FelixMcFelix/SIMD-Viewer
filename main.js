@@ -5,6 +5,7 @@ function IS3Main() {
 
 	var targetHeight;
 	var map;
+	var sP;
 
 	this.selectAll = selectAll;
 	this.deselectAll = deselectAll;
@@ -43,6 +44,7 @@ function IS3Main() {
 
 	function domReady() {
 		map = new Map(Model, Model.data.referendum);
+		sP = new scatterPlotHandler();
 		map.scale = 1;
 		big();
 	}
@@ -63,16 +65,27 @@ function IS3Main() {
 
 	function setMode(i) {
 		map.scale = 1;
-		if (i != 0) positionSmallMapView();
-		else transformElem(document.getElementById("mapCont"), "");
+		if (i != 0) {
+			document.getElementById("data-box").style.opacity = 0;
+			positionSmallMapView();
+		} else {
+			document.getElementById("data-box").style.opacity = 1;
+			transformElem(document.getElementById("mapCont"), "");
+		}
 		t.mode = i;
+
+		if (i == 1) {
+			transformElem(document.getElementById("scatterCont"), "scale(1, 1)");
+		} else {
+			transformElem(document.getElementById("scatterCont"), "scale(0, 0)");
+		}
 	}
 
 	function positionSmallMapView() {
-		var offLeft = targetHeight/2+25+200;
+		var offLeft = targetHeight/2+25+180;
 		var topStart = document.getElementById("selector-box").clientHeight+10+25
 
-		var vertSpaceSel = topStart+(window.innerHeight-(topStart+25))/2;
+		var vertSpaceSel = topStart+(targetHeight-topStart)/2;
 		var offTop = vertSpaceSel-(window.innerHeight/2);
 
 		var rescale = 400/(targetHeight-124);
@@ -130,6 +143,11 @@ function IS3Main() {
 
 		if (t.mode != 0) positionSmallMapView();
 		else transformElem(document.getElementById("mapCont"), "");
+
+		var topStart = document.getElementById("selector-box").clientHeight+10+25
+
+		document.getElementById("data-box").style.height = (targetHeight-topStart)+"px";
+
 	}
 
 	window.addEventListener("resize", big);
