@@ -1,6 +1,9 @@
 window.Model = new (function(){
 	var t = this;
 
+	/**
+	* Storage space for initial parsed csv data.
+	*/
 	t.data = {
 		referendum: [[]],
 		simd: [[]]
@@ -15,11 +18,7 @@ window.Model = new (function(){
 		normal2: false,
 		//Store the names of our desired variables here for now.
 		var1: "",
-		var2: "",
-		var1dat: [],
-		var2dat: [],
-		//[0] and [1] are min and max for var1, [1] and [2] are min and max for var2
-		colours: []
+		var2: ""
 	}
 
 	t.masterSelections = [];
@@ -37,10 +36,14 @@ window.Model = new (function(){
 
 	var removeQueue = [];
 
-	//Adding new constituencies.
+	//Space to access constituency daa via multiple means.
 	t.constituencies = {};
 	t.constituenciesArray = [];
 
+	/**
+	* Adds a single constituency element to
+	* both storage mechanisms.
+	*/
 	t.addConstituency = function(constObj){
 		constObj.id = t.constituenciesArray.length;
 
@@ -49,6 +52,11 @@ window.Model = new (function(){
 	}
 
 	//EVENTS
+	/**
+	* These methods trigger events, manipulating the data as
+	* expected while causing notifaication to all subscribers of
+	* those events.
+	*/
 	t.select = function(id){
 		t.constituenciesArray[id].selected = true;
 
@@ -99,7 +107,6 @@ window.Model = new (function(){
 		//Obtain column numbers.
 		var col1 = parseInt(Model.comparison.var1.replace(/\D/g,''));
 		var col2 = parseInt(Model.comparison.var2.replace(/\D/g,''));
-		
 
 		//Use our setting to propagate the data changes.
 		for(var i=0; i<t.constituenciesArray.length; i++){
@@ -119,12 +126,20 @@ window.Model = new (function(){
 			}
 		
 		}
-		normalise();
+
+		//Execute normalisation if we need to.
+		if(t.comparison.normal1 || t.comparison.normal2) normalise();
 
 		notifyAll("dataChange");
 		notifyAll("change");
 	}
 
+	/**
+	* Scales data of all Constituency Objects.
+	* If norm boxes are ticked, it scales the data
+	* between 0 and 1 on that column. If the boxes
+	* are not ticked, then change nothing.
+	*/
 	var normalise = function(){
 		var maxX,minX,maxY,minY;
 
@@ -157,6 +172,11 @@ window.Model = new (function(){
 	}
 
 	//SUBSCRIPTION
+	/**
+	* Set of subscription management functions for our
+	* event handling framework. Add a function pointer
+	* to the list of subscribes for an event, or remove it.
+	*/
 	t.addSelectListener = function(func){
 		addListener("select", func);
 	}
@@ -190,10 +210,17 @@ window.Model = new (function(){
 
 	function removeListener(event, func) {
 		subscribers[event].splice(subscribers[event].indexOf(func), 1);
-		debugger;
 	}
 
 	//PUBLISHING
+	/**
+	* Key component of our custom event framework.
+	* For a given event, executes all functions
+	* awaiting execution on a given signal.
+	*
+	* Iterates over the removeQueue to determine
+	* which listeners are no longer lisening.
+	*/
 	var notifyAll = function(event){
 		for(var i=0; i<subscribers[event].length; i++){
 			subscribers[event][i]();
@@ -206,6 +233,12 @@ window.Model = new (function(){
 }
 )()
 
+/**
+* Constituency class, used to store a constituency.
+* Stores the data rows from each file, id is generated
+* programmatically later. x and y are preinitialised
+* to hold the values of the default select box columns.
+*/
 window.Constituency = function(name, refRow, simdRow){
 	this.id = 0;
 	this.name = name;
@@ -219,6 +252,10 @@ window.Constituency = function(name, refRow, simdRow){
 	this.hover = false;
 }
 
+/**
+* toNumber method, used to strip excess punctuation
+* from numbers and convert them to numerical representation
+*/
 window.toNumber = function(num){
 	if(typeof num == "string"){
 		num = num.replace(",","");

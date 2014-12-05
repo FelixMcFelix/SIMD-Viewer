@@ -32,17 +32,6 @@ window.controlPane = new (function(){
 				intInd++;
 			}
 		}
-		/*
-		//Add CUSTOM boxes to each selector. These will allow more advanced data transforms.
-		store = "simd"
-		custom1num = Model.data.simd[0].length;
-		custom2num = custom1num+1;
-
-		sel1.options[sel1.options.length] = new Option("Custom 1", store+custom1num, false, false);
-		sel2.options[sel2.options.length] = new Option("Custom 1", store+custom1num, false, false);
-		sel1.options[sel1.options.length] = new Option("Custom 2", store+custom2num, false, false);
-		sel2.options[sel2.options.length] = new Option("Custom 2", store+custom2num, false, false);*/
-		//DEPRECATED unless I find the time.
 
 		//Match initial model state to initial selectorbox state.
 		Model.comparison.var1 = "ref1";
@@ -70,6 +59,9 @@ window.controlPane = new (function(){
 	}
 
 	changedSelectEvt = function(){
+		//Determine which box changed, set the value
+		//on the model and then broadcast to all
+		//the model's data listeners.
 		var caller = this.id;
 		switch(caller){
 			case "box1":
@@ -83,6 +75,9 @@ window.controlPane = new (function(){
 	}
 
 	changedCheckboxEvt = function(){
+		//Again, determine which box changed, set the value
+		//on the model and then broadcast to all
+		//the model's data listeners.
 		var caller = this.id;
 		switch(caller){
 			case "normVar1":
@@ -96,6 +91,9 @@ window.controlPane = new (function(){
 	}
 
 	changedRadioEvt = function(){
+		//Determine which radio changed, set the value
+		//on the model and then broadcast to all
+		//the model's data listeners.
 		var caller = this.id;
 		switch(caller){
 			case "var0sort":
